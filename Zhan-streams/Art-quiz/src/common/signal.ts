@@ -18,4 +18,4 @@ class Signal<ListenerType> {
   }
 }
 
-export default Control;
+export default Signal;
