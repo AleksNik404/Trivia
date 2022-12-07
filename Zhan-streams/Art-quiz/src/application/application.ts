@@ -1,4 +1,3 @@
-
 import Control from '../common/control';
 import { StartPage } from './startPage';
 import { SettingsPage } from './settingsPage';
@@ -28,15 +27,16 @@ export class Application extends Control {
 
     gameField.onFinish = (result) => {
       gameField.destroy();
-      const gameOverPage = new GameOverPage(this.node, 'appGameOverPage', result)
+      const gameOverPage = new GameOverPage(this.node, 'appGameOverPage', result);
       gameOverPage.onHome = () => {
-        gameOverPage.destroy()
-        this.mainCycle()
-      }
+        gameOverPage.destroy();
+        this.mainCycle();
+      };
       gameOverPage.onNext = () => {
         // if(categoryIndex >)
-        this.gameCycle(gameName, categoryIndex)
-      }
+        gameOverPage.destroy();
+        this.gameCycle(gameName, categoryIndex);
+      };
     };
   }
 
@@ -48,8 +48,8 @@ export class Application extends Control {
     };
 
     categories.onSelect = (index) => {
-      categories.destroy();      
-      this.gameCycle(gameName, index)   
+      categories.destroy();
+      this.gameCycle(gameName, index);
     };
   }
 
