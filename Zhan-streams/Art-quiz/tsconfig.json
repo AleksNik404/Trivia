@@ -5,10 +5,7 @@
     "module": "es6",
     "target": "es5",
     "allowJs": true,
-    "lib": [
-      "es2016",
-      "dom"
-  ]
+    "lib": ["es2016", "dom"]
   },
   "files": ["src/index.ts", "module.d.ts"]
 }

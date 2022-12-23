@@ -19,6 +19,12 @@ interface IImageDto {
   name: IMultiLangString;
 }
 
+export interface ICategoryData {
+  name: string;
+  picture: string;
+  score?: boolean[];
+}
+
 type IImagesDto = Record<string, IImageDto>;
 
 export class QuizDataModel {
@@ -30,6 +36,22 @@ export class QuizDataModel {
     this.data = await this.loadImagesData(imagesDataURL);
 
     return this;
+  }
+
+  public getCategoriesData() {
+    const questionsPerCategory = 10;
+    const categoriesCount = Math.floor(this.data.length / questionsPerCategory);
+    const categories: ICategoryData[] = [];
+    for (let i = 0; i < categoriesCount; i += 1) {
+      const pictureUrl = `./public/img/pictures/${i * questionsPerCategory}.jpg`;
+      const categoryData: ICategoryData = {
+        name: i.toString(),
+        picture: pictureUrl,
+        score: Array(categoriesCount).fill(false),
+      };
+      categories.push(categoryData)
+    }
+    return categories;
   }
 
   private loadImagesData(url: string): Promise<IPictureData[]> {

@@ -13,9 +13,9 @@ export class Application extends Control {
     //preloader
     const preloader = new Control(this.node, 'ApplicationPreloader', 'div', '', 'loading...');
     this.model = new QuizDataModel();
-    this.model.build().then((result) => {      
+    this.model.build().then((result) => {
       preloader.destroy();
-      console.log(result.data)
+      console.log(result.data);
       //main
       this.mainCycle();
     });
@@ -51,7 +51,12 @@ export class Application extends Control {
   }
 
   private categoryCycle(gameName: string) {
-    const categories = new CategoriesPage(this.node, 'appCategoriesPage', gameName);
+    const categories = new CategoriesPage(
+      this.node,
+      'appCategoriesPage',
+      gameName,
+      this.model.getCategoriesData()
+    );
     categories.onBack = () => {
       categories.destroy();
       this.mainCycle();
