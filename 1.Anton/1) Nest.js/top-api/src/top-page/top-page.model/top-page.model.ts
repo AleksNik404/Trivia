@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
 
 export enum TopLevelCategory {
   Courses,
@@ -7,7 +8,7 @@ export enum TopLevelCategory {
   Products,
 }
 
-Schema();
+Schema({ _id: false });
 export class HhData {
   @Prop()
   count: number;
@@ -23,7 +24,7 @@ export class HhData {
 }
 export const HhDataSchema = SchemaFactory.createForClass(HhData);
 
-Schema();
+Schema({ _id: false });
 export class TopPageAdvantages {
   @Prop()
   title: string;
@@ -53,10 +54,10 @@ export class TopPageModel {
   @Prop()
   category: string;
 
-  @Prop({ type: HhDataSchema, _id: false })
+  @Prop({ type: HhDataSchema })
   hh?: HhData;
 
-  @Prop({ type: [TopPageAdvantagesSchema], _id: false })
+  @Prop({ type: [TopPageAdvantagesSchema] })
   advantages: TopPageAdvantages[];
 
   @Prop()
@@ -69,4 +70,5 @@ export class TopPageModel {
   tags: string[];
 }
 
+export type TopPageModelDocument = HydratedDocument<TopPageModel>;
 export const TopPageSchema = SchemaFactory.createForClass(TopPageModel);
