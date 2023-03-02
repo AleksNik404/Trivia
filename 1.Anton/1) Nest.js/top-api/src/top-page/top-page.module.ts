@@ -10,6 +10,7 @@ import { TopPageSchema } from './top-page.model/top-page.model';
       {
         name: 'TopPageModel',
         schema: TopPageSchema,
+        collection: 'TopPage',
       },
     ]),
   ],

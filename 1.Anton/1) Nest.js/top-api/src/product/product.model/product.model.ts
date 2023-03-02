@@ -28,16 +28,13 @@ export class ProductModel {
   price: number;
 
   @Prop()
-  oldPrice: number;
+  oldPrice?: number;
 
   @Prop()
   credit: number;
 
   @Prop()
-  calculatedRating: number;
-
-  @Prop()
-  deescription: string;
+  description: string;
 
   @Prop()
   advantages: string;
