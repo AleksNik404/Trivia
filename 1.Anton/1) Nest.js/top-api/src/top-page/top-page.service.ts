@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { group } from 'console';
 import { Model } from 'mongoose';
 import { CreateTopPageDto } from './dto/create-top-page.dto';
 
@@ -29,7 +30,23 @@ export class TopPageService {
 
   async findByCategory(firstCategory: TopLevelCategory) {
     return this.topPageModel
-      .find({ firstCategory }, { alias: 1, secondCategory: 1, title: 1 })
+      .aggregate([
+        {
+          $match: {
+            firstCategory,
+          },
+        },
+        {
+          $group: {
+            _id: {
+              secondCategory: '$secondCategory',
+              pages: {
+                $push: { alias: '$alias', title: '$title' },
+              },
+            },
+          },
+        },
+      ])
       .exec();
   }
 

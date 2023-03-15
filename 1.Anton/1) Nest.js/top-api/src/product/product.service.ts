@@ -83,4 +83,15 @@ export class ProductService {
       })[]
     >;
   }
+
+  async findByText(text: string) {
+    return this.productModel
+      .find({
+        $text: {
+          $search: text,
+          $caseSensitive: false,
+        },
+      })
+      .exec();
+  }
 }
